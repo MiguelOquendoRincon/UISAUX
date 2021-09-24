@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Text(
               'Inicio de Sesión',
               style: TextStyle(
-                fontSize: 30.0,
+                fontSize: 22.0,
                 color: Colors.grey[800],
                 fontWeight: FontWeight.bold
               ),
@@ -98,13 +98,14 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
 
           Container(
+            height: 50.0,
             child: TextField(
               decoration: InputDecoration(
                 hintText: '',
                 labelText: 'Usuario',
                 suffixIcon: Icon(Icons.supervised_user_circle),
                 labelStyle: TextStyle(
-                  fontSize: 20.0
+                  fontSize: 18.0
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0)
@@ -114,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
 
           Container(
+            height: 50.0,
             margin: EdgeInsets.only(top: 30.0),
             child: TextField(
               obscureText: !seePassword,
@@ -129,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
                 labelStyle: TextStyle(
-                  fontSize: 20.0
+                  fontSize: 18.0
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0)
@@ -176,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Color(0XFF0CCC29),
             ),
             child: FlatButton(
-              onPressed: (){}, 
+              onPressed: () => Navigator.pushNamed(context, 'register'), 
               child: Text(
                 'Registrarme',
                 style: TextStyle(
@@ -214,36 +216,6 @@ class _LoginScreenState extends State<LoginScreen> {
           
         ],
       ),
-    );
-  }
-
-  Widget _socialContainer(){
-    return Container(
-      margin: EdgeInsets.only(top: 30.0),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                height: 1.0,
-                width: size.width * 0.365,
-                margin: EdgeInsets.symmetric(horizontal: 10.0),
-                color: Colors.grey,
-              ),
-              Text('Redes Sociales'),
-              Container(
-                height: 1.0,
-                width: size.width * 0.365,
-                margin: EdgeInsets.symmetric(horizontal: 10.0),
-                color: Colors.grey,
-              ),
-            ],
-          ),
-
-
-          
-        ],
-      )
     );
   }
 
