@@ -319,29 +319,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     "phone": phoneController.text.trim(),
                     "rol": _chosenValue
                   });
-                  var hola = await DBPovider.db.nuevoUsuario(user);
-                  print(hola);
-                  if(user.password == passwordController.text){
-                    Navigator.pushReplacementNamed(context, 'menu');
-
-                  } else{
-                    showDialog(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        title: Text('Ups! Credenciales incorrectas, intenta nuevamente'),
-                        content: FlatButton(
-                          color: Theme.of(context).primaryColor,
-                          onPressed: () => Navigator.pop(context),
-                          child: Text(
-                            'Entendido',
-                            style: TextStyle(
-                              color: Colors.white
-                            ),
-                          )
-                        ),
-                      )
-                    );
-                  }
+                  await DBPovider.db.nuevoUsuario(user);
+                  Navigator.pushReplacementNamed(context, 'menu');
+                  
                 } catch(e){
                   showDialog(
                     context: context,

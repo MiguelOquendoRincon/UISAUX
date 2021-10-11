@@ -105,6 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 50.0,
             child: TextField(
               controller: userController,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintText: '',
                 labelText: 'Usuario',
@@ -225,7 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     )
                   );
 
-                }else{
+                }else if(_isEmail(userController.text)){
                   try{
                     Usuario user = await DBPovider.db.getUsuarioByUser(userController.text);
                     if(user.password == passwordController.text){
@@ -267,6 +268,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   }
 
+                } else{
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: Text('Ups! Ingresa un email valido'),
+                      content: FlatButton(
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () => Navigator.pop(context),
+                        child: Text(
+                          'Entendido',
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                        )
+                      ),
+                    )
+                  );
                 }
                 
                 
@@ -287,6 +305,15 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  bool _isEmail(String em) {
+
+    String p = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+    RegExp regExp = new RegExp(p);
+
+    return regExp.hasMatch(em);
   }
 
   
