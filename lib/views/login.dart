@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:uis_aux/models/usuario_model.dart';
+import 'package:uis_aux/providers/db_provider.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -17,6 +19,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool seePassword = false;
 
   bool checkedValue = false;
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController userController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -100,6 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             height: 50.0,
             child: TextField(
+              controller: userController,
               decoration: InputDecoration(
                 hintText: '',
                 labelText: 'Usuario',
@@ -118,6 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: 50.0,
             margin: EdgeInsets.only(top: 30.0),
             child: TextField(
+              controller: passwordController,
               obscureText: !seePassword,
               decoration: InputDecoration(
                 hintText: '',
@@ -143,19 +149,19 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             // margin: EdgeInsets.only(left: 190.0),
             child: CheckboxListTile(
-                title: Text(
-                  'Recordarme',
-                  textAlign: TextAlign.right,
-                ),
-                value: checkedValue,
-                onChanged: (newValue) {
-                  setState(() {
-                    checkedValue = newValue;
-                  });
-                },
-                activeColor: Theme.of(context).primaryColor,
-                controlAffinity: ListTileControlAffinity.trailing,  //  <-- leading Checkbox
+              title: Text(
+                'Recordarme',
+                textAlign: TextAlign.right,
               ),
+              value: checkedValue,
+              onChanged: (newValue) {
+                setState(() {
+                  checkedValue = newValue;
+                });
+              },
+              activeColor: Theme.of(context).primaryColor,
+              controlAffinity: ListTileControlAffinity.trailing,  //  <-- leading Checkbox
+            ),
           ),
         ],
       ),
@@ -200,7 +206,71 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Color(0XFF0CCC29),
             ),
             child: FlatButton(
-              onPressed: (){}, 
+              onPressed: ()async{
+                if(userController.text == '' || passwordController.text == ''){
+                  showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: Text('Ups! Por favor ingresa tus datos'),
+                      content: FlatButton(
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () => Navigator.pop(context),
+                        child: Text(
+                          'Entendido',
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                        )
+                      ),
+                    )
+                  );
+
+                }else{
+                  try{
+                    Usuario user = await DBPovider.db.getUsuarioByUser(userController.text);
+                    if(user.password == passwordController.text){
+                      Navigator.pushReplacementNamed(context, 'menu');
+                    } else{
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text('Ups! Credenciales incorrectas, intenta nuevamente'),
+                          content: FlatButton(
+                            color: Theme.of(context).primaryColor,
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(
+                              'Entendido',
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
+                            )
+                          ),
+                        )
+                      );
+                    }
+                  } catch(e){
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        title: Text('Ups! Parece que el usuario no existe'),
+                        content: FlatButton(
+                          color: Theme.of(context).primaryColor,
+                          onPressed: () => Navigator.pop(context),
+                          child: Text(
+                            'Entendido',
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
+                          )
+                        ),
+                      )
+                    );
+                  }
+
+                }
+                
+                
+              }, 
               child: Text(
                 'Iniciar Sesión',
                 style: TextStyle(

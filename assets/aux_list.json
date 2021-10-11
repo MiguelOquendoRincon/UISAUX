@@ -1,0 +1,68 @@
+[
+  {
+    "nombre": "Auxiliatura cálculo",
+    "duracion": "12 horas semanales",
+    "area": "Matematicas",
+    "promedio": 3.5,
+    "lugar": "Camilo Torres",
+    "id": 1,
+    "responsable": "Juan Martinez",
+    "descripcion": "Auxiliatura que busca dar apoyo a los estudiantes en la materia de cálculo multivariable",
+    "status": 1
+  },
+  {
+    "nombre": "Auxiliatura fisica",
+    "duracion": "15 horas semanales",
+    "area": "Fisica",
+    "promedio": 3.9,
+    "lugar": "Camilo Torres",
+    "id": 2,
+    "responsable": "Fernanda Torres",
+    "descripcion": "Auxiliatura que busca dar apoyo a los estudiantes en la materia de física electromagnetica",
+    "status": 1
+  },
+  {
+    "nombre": "Auxiliatura química",
+    "duracion": "10 horas semanales",
+    "area": "Química",
+    "promedio": 3.4,
+    "lugar": "Camilo Torres",
+    "id": 3,
+    "responsable": "Diana Rodriguez",
+    "descripcion": "Auxiliatura que busca dar apoyo a los estudiantes en la materia de química",
+    "status": 0
+  },
+  {
+    "nombre": "Auxiliatura programación",
+    "duracion": "13 horas semanales",
+    "area": "Programación",
+    "promedio": 3.7,
+    "lugar": "Laboratorios Pesados",
+    "id": 4,
+    "responsable": "Sergio Arboleda",
+    "descripcion": "Auxiliatura que busca dar apoyo a los estudiantes en la materia de programación",
+    "status": 1
+  },
+  {
+    "nombre": "Auxiliatura algebra",
+    "duracion": "12 horas semanales",
+    "area": "Matematicas",
+    "promedio": 3.8,
+    "lugar": "Camilo Torres",
+    "id": 5,
+    "responsable": "Luis Roncancio",
+    "descripcion": "Auxiliatura que busca dar apoyo a los estudiantes en la materia de algebra",
+    "status": 1
+  },
+  {
+    "nombre": "Auxiliatura Analisis Numerico",
+    "duracion": "8 horas semanales",
+    "area": "Matematicas",
+    "promedio": 3.5,
+    "lugar": "Laboratorios Pesados",
+    "id": 6,
+    "responsable": "Juliana Mantilla",
+    "descripcion": "Auxiliatura que busca dar apoyo a los estudiantes en la materia de cálculo multivariable",
+    "status": 1
+  }
+]
