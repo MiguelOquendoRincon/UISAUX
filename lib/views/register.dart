@@ -320,7 +320,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     "rol": _chosenValue
                   });
                   await DBPovider.db.nuevoUsuario(user);
-                  Navigator.pushReplacementNamed(context, 'menu');
+                  Navigator.pushReplacementNamed(context, 'menu', arguments: user);
                   
                 } catch(e){
                   showDialog(

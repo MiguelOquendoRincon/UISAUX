@@ -6,15 +6,15 @@ import 'package:uis_aux/models/listadoAux_model.dart';
 import 'package:uis_aux/models/usuario_model.dart';
 import 'package:uis_aux/providers/db_provider.dart';
 
-class AUXLIST extends StatefulWidget {
-  static const routeName = 'menu';
-  const AUXLIST({ Key key }) : super(key: key);
+class AUXLIST2 extends StatefulWidget {
+  static const routeName = 'new_menu';
+  const AUXLIST2({ Key key }) : super(key: key);
 
   @override
-  _AUXLISTState createState() => _AUXLISTState();
+  _AUXLIST2State createState() => _AUXLIST2State();
 }
 
-class _AUXLISTState extends State<AUXLIST> {
+class _AUXLIST2State extends State<AUXLIST2> {
 
   RefreshController _refreshController =
       RefreshController(initialRefresh: false);
@@ -27,7 +27,7 @@ class _AUXLISTState extends State<AUXLIST> {
   void _onRefresh() async{
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
-    getJson();
+    // getJson();
     // if failed,use refreshFailed()
     _refreshController.refreshCompleted();
   }
@@ -36,7 +36,7 @@ class _AUXLISTState extends State<AUXLIST> {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
     // if failed,use loadFailed(),if no data return,use LoadNodata()
-    getJson();
+    // getJson();
     setState(() {
 
     });
@@ -47,7 +47,7 @@ class _AUXLISTState extends State<AUXLIST> {
   @override
   Widget build(BuildContext context) {
     args = ModalRoute.of(context).settings.arguments;
-    print(args);
+    listadoAux = args;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -73,20 +73,7 @@ class _AUXLISTState extends State<AUXLIST> {
   }
 
   Widget _body(){
-    
-    return FutureBuilder(
-      future: getJson(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if(snapshot.hasData){
-          listadoAux = listadoAuxFromJson((snapshot.data));
-          return _listadoAux();
-        } else{
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-    );
+    return _listadoAux();
   }
 
 
@@ -188,91 +175,54 @@ class _AUXLISTState extends State<AUXLIST> {
           }),
         ),
 
-        FutureBuilder(
-          future: DBPovider.db.getUsuarioByUser(args.usuario),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if(snapshot.hasData){
-              if(snapshot.data.rol == 'Docente'){
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1.0,
-                            blurRadius: 5,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ]
-                      ),
-                      child: FlatButton(
-                        onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
-                        color: Theme.of(context).primaryColor,
-                        splashColor: Theme.of(context).primaryColor,
-                        child: Text('Cerrar sesión', style: TextStyle(color: Colors.white),)
-                      )
-                    ),
-
-                    Container(
-                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1.0,
-                            blurRadius: 5,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ]
-                      ),
-                      child: FlatButton(
-                        onPressed: () => Navigator.pushNamed(context, 'addAux', arguments: listadoAux),
-                        color: Theme.of(context).primaryColor,
-                        splashColor: Theme.of(context).primaryColor,
-                        child: Text('Agregar Auxiliatura', style: TextStyle(color: Colors.white),)
-                      )
-                    )
-                  ],
-                );
-              } else{
-                return Container(
-                  margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 1.0,
-                        blurRadius: 5,
-                        offset: Offset(0, 3), // changes position of shadow
-                      ),
-                    ]
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              // margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1.0,
+                    blurRadius: 5,
+                    offset: Offset(0, 3), // changes position of shadow
                   ),
-                  child: FlatButton(
-                    onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
-                    color: Theme.of(context).primaryColor,
-                    splashColor: Theme.of(context).primaryColor,
-                    child: Text('Cerrar sesión', style: TextStyle(color: Colors.white),)
-                  )
-                );
-              }
-            } else{
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
-        ),
+                ]
+              ),
+              child: FlatButton(
+                onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
+                color: Theme.of(context).primaryColor,
+                splashColor: Theme.of(context).primaryColor,
+                child: Text('Cerrar sesión', style: TextStyle(color: Colors.white),)
+              )
+            ),
 
-        
+            Container(
+              // margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1.0,
+                    blurRadius: 5,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ]
+              ),
+              child: FlatButton(
+                onPressed: () => Navigator.pushNamed(context, 'addAux', arguments: listadoAux),
+                color: Theme.of(context).primaryColor,
+                splashColor: Theme.of(context).primaryColor,
+                child: Text('Agregar Auxiliatura', style: TextStyle(color: Colors.white),)
+              )
+            )
+          ],
+        )
       ],
     );
   }
@@ -319,9 +269,4 @@ class _AUXLISTState extends State<AUXLIST> {
       )
     );
   }
-
-  
-  Future<String> getJson() {
-  return rootBundle.loadString('assets/aux_list.json');
-}
 }

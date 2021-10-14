@@ -230,7 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   try{
                     Usuario user = await DBPovider.db.getUsuarioByUser(userController.text);
                     if(user.password == passwordController.text){
-                      Navigator.pushReplacementNamed(context, 'menu');
+                      Navigator.pushReplacementNamed(context, 'menu', arguments: user);
                     } else{
                       showDialog(
                         context: context,

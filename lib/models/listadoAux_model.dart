@@ -19,7 +19,7 @@ class ListadoAux {
 
   String nombre;
   String duracion;
-  double promedio;
+  String promedio;
   String lugar;
   int id;
   String responsable;
@@ -30,7 +30,7 @@ class ListadoAux {
   factory ListadoAux.fromJson(Map<String, dynamic> json) => ListadoAux(
       nombre: json["nombre"],
       duracion: json["duracion"],
-      promedio: json["promedio"].toDouble(),
+      promedio: json["promedio"].toString(),
       lugar: json["lugar"],
       id: json["id"],
       responsable: json["responsable"],
